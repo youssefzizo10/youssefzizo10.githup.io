@@ -1,0 +1,367 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PlayScope | عالم الألعاب</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #080910;
+  --card: #141522;
+  --purple: #8b5cf6;
+  --blue: #2563eb;
+  --text: #f7f5ff;
+  --muted: #aaa8bd;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Cairo', sans-serif;
+  line-height: 1.8;
+}
+a { color: inherit; text-decoration: none; }
+.container { width: min(1120px, 92%); margin: auto; }
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(8,9,16,.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid #27243a;
+}
+.nav {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+.logo {
+  font-size: 27px;
+  font-weight: 900;
+  direction: ltr;
+  background: linear-gradient(90deg,#a78bfa,#38bdf8);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+nav { display: flex; gap: 24px; color: #d5d2e5; }
+nav a:hover { color: #a78bfa; }
+.menu-btn {
+  display: none;
+  background: var(--card);
+  border: 1px solid #39334f;
+  color: white;
+  padding: 7px 13px;
+  border-radius: 9px;
+  font-size: 20px;
+}
+
+.hero {
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 15% 35%,rgba(91,33,182,.42),transparent 48%),
+    radial-gradient(ellipse at 85% 75%,rgba(37,99,235,.28),transparent 45%),
+    linear-gradient(135deg,#101020,#090a13 65%);
+  border-bottom: 1px solid #25213b;
+}
+.hero-content { padding: 75px 0; max-width: 760px; }
+.tag {
+  display: inline-block;
+  background: #251a42;
+  color: #c4b5fd;
+  border: 1px solid #543a83;
+  padding: 5px 15px;
+  border-radius: 30px;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-size: clamp(34px,6vw,60px);
+  line-height: 1.35;
+  font-weight: 900;
+  margin-bottom: 18px;
+}
+.hero h1 span {
+  color: #a78bfa;
+}
+.hero p {
+  color: #c0bdd0;
+  font-size: 17px;
+  max-width: 650px;
+  margin-bottom: 28px;
+}
+.main-btn {
+  display: inline-block;
+  background: linear-gradient(100deg,#7c3aed,#2563eb);
+  padding: 12px 26px;
+  border-radius: 10px;
+  font-weight: 800;
+  box-shadow: 0 8px 30px #5b21b655;
+  transition: .2s;
+}
+.main-btn:hover { transform: translateY(-3px); }
+
+section { padding: 65px 0; }
+.section-head { margin-bottom: 28px; }
+.section-head small { color: #a78bfa; font-weight: 800; }
+.section-head h2 { font-size: 30px; margin-top: 5px; }
+.section-head p { color: var(--muted); }
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 24px;
+}
+.game-card {
+  background: var(--card);
+  border: 1px solid #29283b;
+  border-radius: 17px;
+  overflow: hidden;
+  transition: .25s;
+}
+.game-card:hover {
+  transform: translateY(-5px);
+  border-color: #8b5cf6;
+  box-shadow: 0 15px 35px #0008;
+}
+.game-image {
+  position: relative;
+  height: 230px;
+  background: #202033;
+  overflow: hidden;
+}
+.game-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: .4s;
+}
+.game-card:hover img { transform: scale(1.04); }
+.rank {
+  position: absolute;
+  top: 13px;
+  right: 13px;
+  background: #8b5cf6;
+  color: white;
+  border-radius: 8px;
+  padding: 3px 12px;
+  font-weight: 900;
+}
+.game-info { padding: 21px; }
+.game-info h3 { font-size: 21px; margin-bottom: 7px; }
+.game-info p { color: var(--muted); font-size: 14px; min-height: 76px; }
+.game-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 0;
+  color: #c4b5fd;
+  font-size: 14px;
+}
+.game-link {
+  display: block;
+  text-align: center;
+  background: #292044;
+  border: 1px solid #59418a;
+  color: #ddd1ff;
+  padding: 9px;
+  border-radius: 9px;
+  font-weight: 700;
+}
+.game-link:hover { background: #6d28d9; color: white; }
+
+.about-box {
+  background: linear-gradient(120deg,#17142a,#101b31);
+  border: 1px solid #373052;
+  border-radius: 18px;
+  padding: 32px;
+}
+.about-box h2 { margin-bottom: 10px; }
+.about-box p { color: var(--muted); }
+
+footer {
+  border-top: 1px solid #292638;
+  padding: 28px 0;
+  text-align: center;
+  color: #9692a9;
+}
+footer strong { color: #a78bfa; }
+
+@media(max-width:700px) {
+  .nav { min-height: 68px; }
+  nav {
+    display: none;
+    position: absolute;
+    top: 68px;
+    right: 0;
+    left: 0;
+    background: #11111e;
+    padding: 18px 5%;
+    flex-direction: column;
+    gap: 12px;
+    border-bottom: 1px solid #39334f;
+  }
+  nav.open { display: flex; }
+  .menu-btn { display: block; }
+  .hero { min-height: 420px; }
+  .hero-content { padding: 55px 0; }
+  .hero p { font-size: 15px; }
+  .games-grid { grid-template-columns: 1fr; }
+  .game-image { height: 210px; }
+  section { padding: 48px 0; }
+  .section-head h2 { font-size: 25px; }
+  .about-box { padding: 23px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container nav">
+    <a class="logo" href="#">PlayScope</a>
+    <button class="menu-btn" id="menuBtn" aria-label="فتح القائمة">☰</button>
+    <nav id="navigation">
+      <a href="#">الرئيسية</a>
+      <a href="#games">الألعاب</a>
+      <a href="#about">عن الموقع</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container hero-content">
+      <span class="tag">PLAY SCOPE • GAMING GUIDE</span>
+      <h1>اكتشف عالم <span>الألعاب</span> بشكل مختلف</h1>
+      <p>
+        بتدور على ألعاب تجمع بين القصص الأسطورية والأكشن والمغامرات؟
+        اكتشف مراجعاتنا واختياراتنا لأفضل ألعاب الكمبيوتر، وتعرّف على
+        مميزاتها ومتطلبات تشغيلها ومصادرها الرسمية.
+      </p>
+      <a class="main-btn" href="#games">اكتشف أفضل الألعاب ←</a>
+    </div>
+  </section>
+
+  <section id="games">
+    <div class="container">
+      <div class="section-head">
+        <small>OUR TOP PICKS</small>
+        <h2>أفضل 5 ألعاب تستحق التجربة</h2>
+        <p>اختيارات PlayScope لعشاق القصة والأكشن والمغامرة.</p>
+      </div>
+      <div class="games-grid" id="gameList"></div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <div class="about-box">
+        <h2>مرحباً بك في PlayScope 🎮</h2>
+        <p>
+          PlayScope موقع مهتم بعالم الألعاب. بنقدم مراجعات ومعلومات
+          تساعدك تختار لعبتك القادمة، ونسعى لتقديم محتوى واضح ومفيد
+          لكل محبي Gaming.
+        </p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <strong>PlayScope</strong>
+    <p>Explore the World of Gaming</p>
+    <p>© 2026 PlayScope — جميع الحقوق محفوظة</p>
+  </div>
+</footer>
+
+<script>
+const games = [
+  {
+    name: "Uncharted 4: A Thief's End",
+    description: "مغامرة سينمائية مليئة بالأكشن والألغاز والرحلات المثيرة مع ناثان دريك.",
+    rating: "9.5/10",
+    genre: "Action • Adventure",
+    image: "https://cdn.akamai.steamstatic.com/steam/apps/1659420/header.jpg",
+    link: "https://store.steampowered.com/app/1659420/"
+  },
+  {
+    name: "Red Dead Redemption 2",
+    description: "عالم مفتوح ضخم وقصة عميقة في أجواء الغرب الأمريكي المليئة بالمغامرات.",
+    rating: "9.8/10",
+    genre: "Open World • Action",
+    image: "https://cdn.akamai.steamstatic.com/steam/apps/1174180/header.jpg",
+    link: "https://store.steampowered.com/app/1174180/"
+  },
+  {
+    name: "The Last of Us Part I",
+    description: "رحلة قصصية مؤثرة تجمع بين البقاء والاستكشاف والأحداث المشوقة.",
+    rating: "9.5/10",
+    genre: "Story • Survival",
+    image: "https://cdn.akamai.steamstatic.com/steam/apps/1888930/header.jpg",
+    link: "https://store.steampowered.com/app/1888930/"
+  },
+  {
+    name: "God of War",
+    description: "مغامرة أسطورية تجمع بين القتال القوي والقصة والعلاقة بين كريتوس وابنه.",
+    rating: "9.4/10",
+    genre: "Action • Adventure",
+    image: "https://cdn.akamai.steamstatic.com/steam/apps/1593500/header.jpg",
+    link: "https://store.steampowered.com/app/1593500/"
+  },
+  {
+    name: "Marvel's Spider-Man Remastered",
+    description: "تجربة عالم مفتوح تتيح لك استكشاف نيويورك وخوض مغامرات سبايدرمان.",
+    rating: "9.2/10",
+    genre: "Action • Open World",
+    image: "https://cdn.akamai.steamstatic.com/steam/apps/1817070/header.jpg",
+    link: "https://store.steampowered.com/app/1817070/"
+  }
+];
+
+const gameList = document.getElementById("gameList");
+
+games.forEach((game, index) => {
+  const card = document.createElement("article");
+  card.className = "game-card";
+
+  card.innerHTML = `
+    <div class="game-image">
+      <img src="${game.image}" alt="${game.name}" loading="lazy">
+      <span class="rank">#${index + 1}</span>
+    </div>
+    <div class="game-info">
+      <h3>${game.name}</h3>
+      <p>${game.description}</p>
+      <div class="game-meta">
+        <span>⭐ ${game.rating}</span>
+        <span>${game.genre}</span>
+      </div>
+      <a class="game-link" href="${game.link}" target="_blank" rel="noopener noreferrer">
+        الصفحة الرسمية للعبة ↗
+      </a>
+    </div>
+  `;
+
+  gameList.appendChild(card);
+});
+
+document.getElementById("menuBtn").addEventListener("click", () => {
+  document.getElementById("navigation").classList.toggle("open");
+});
+</script>
+
+</body>
+</html>
